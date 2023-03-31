@@ -3,7 +3,6 @@ name: Build
 on:
   push: {}
 
-
 jobs:
   build-yarn:
     name: Build and test with yarn
@@ -19,7 +18,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: |
+      - name: Build & Test
+        run: |
           npm i -g yarn
           yarn
           yarn run build
@@ -39,7 +39,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: |
+      - name: Build & Test
+        run: |
           npm i -g pnpm
           pnpm i
           pnpm run build
@@ -60,6 +61,7 @@ jobs:
         with:
           node-version: 16
       - uses: bazelbuild/setup-bazelisk@v2
-      - run: |
+      - name: Build & Test
+        run: |
           bazel build //:build
           bazel run //:test
