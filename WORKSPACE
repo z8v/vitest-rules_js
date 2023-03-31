@@ -2,8 +2,8 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
     name = "aspect_rules_js",
-    sha256 = "a592fafd8a27b2828318cebbda0003686c6da3318df366b563e8beeffa05a02c",
-    strip_prefix = "rules_js-1.21.0",
+    sha256 = "7c50475662810ce9635fa45d718220285a8adef32b2febd8631aae62e5816353",
+    strip_prefix = "rules_js-1.23.2",
     url = "https://github.com/aspect-build/rules_js/releases/download/v1.23.2/rules_js-v1.23.2.tar.gz",
 )
 
@@ -15,7 +15,7 @@ load("@rules_nodejs//nodejs:repositories.bzl", "DEFAULT_NODE_VERSION", "nodejs_r
 
 nodejs_register_toolchains(
     name = "nodejs",
-    node_version = "16.14.0",
+    node_version = "16.16.0",
 )
 
 load("@aspect_rules_js//npm:npm_import.bzl", "npm_translate_lock")
