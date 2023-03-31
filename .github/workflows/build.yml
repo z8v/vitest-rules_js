@@ -1,0 +1,65 @@
+name: Build
+
+on:
+  push: {}
+
+
+jobs:
+  build-yarn:
+    name: Build and test with yarn
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: |
+          npm i -g yarn
+          yarn
+          yarn run build
+          yarn run test:unit
+
+  build-pnpm:
+    name: Build and test with pnpm
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: |
+          npm i -g pnpm
+          pnpm i
+          pnpm run build
+          pnpm run test:unit
+
+  build-bazel:
+    name: Build and test with Bazel
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - uses: bazelbuild/setup-bazelisk@v2
+      - run: |
+          bazel build //:build
+          bazel run //:test

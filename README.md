@@ -1,52 +1,30 @@
-# vue-project
+# Running `vitest` with Bazel
 
-This template should help get you started developing with Vue 3 in Vite.
+The project is used to reproduce the issue where `vitest` is not able to find any test files when
+running under Bazel.
 
-## Recommended IDE Setup
+Vitest is working as expected when running with either `yarn` or `pnpm`. All of the mentioned
+use-cases are part of the CI.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Using `pnpm`
 
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
+```
+npm i -g pnpm
+pnpm run build
+pnpm run test:unit
 ```
 
-### Compile and Hot-Reload for Development
+## Using `yarn`
 
-```sh
-npm run dev
 ```
+npm i -g yarn
+yarn run build
+yarn run test:unit
+````
 
-### Type-Check, Compile and Minify for Production
+## Using Bazel
 
-```sh
-npm run build
 ```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+bazel build //:build
+bazel run //:test
+````
